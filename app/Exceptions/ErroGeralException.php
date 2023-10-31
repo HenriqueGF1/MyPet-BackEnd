@@ -14,6 +14,6 @@ class ErroGeralException extends Exception
             'messageFile' => $this->getFile(),
             'messageLine' => $this->getLine(),
             'messageDev' => $this->getMessage(),
-        ]);
+        ], 400);
     }
 }
