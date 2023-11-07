@@ -183,8 +183,6 @@ Route::middleware(['jwt.verify', 'usuario.acesso'])->group(function () {
     //
     Route::controller(AnimalController::class)->group(function (): void {
 
-        Route::get('usuario/animais', [AnimalController::class, 'animaisUsuario'])->name('animais.animaisUsuario');
-        //
         Route::post('/animais', 'store')->name('animais.store');
         //
         Route::get('/animais/{id}', 'show')->name('animais.show')
