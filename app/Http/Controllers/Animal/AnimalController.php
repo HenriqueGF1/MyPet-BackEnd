@@ -27,6 +27,17 @@ class AnimalController extends Controller
             throw new ErroGeralException($exception->getMessage());
         }
     }
+    // Animais do usuário
+    public function animaisUsuario(): object
+    {
+        try {
+            return AnimalResource::collection(
+                $this->service->animaisUsuario()
+            );
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
     // Mostrar animais inativos
     public function inativos(): object
     {
