@@ -32,9 +32,11 @@ class AnimalService
     public function animaisUsuario(): object
     {
         try {
-            return $this->model->whereNull(
-                'dt_inativacao'
-            )->where(
+            return $this->model
+            // ->whereNull(
+            //     'dt_inativacao'
+            // )
+            ->where(
                 'id_usuario',
                 '=',
                 UsuarioService::getIdUsuarioLoged()
