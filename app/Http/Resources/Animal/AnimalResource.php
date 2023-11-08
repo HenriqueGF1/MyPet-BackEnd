@@ -24,6 +24,7 @@ class AnimalResource extends JsonResource
             "nome" => $this->nome,
             "descricao" => $this->descricao,
             "idade" => $this->idade,
+            "idadeEUA" =>  date('Y-m-d', strtotime($this->idade)),
             "sexo" => $this->sexo,
             "dt_registro" => $this->dt_registro,
             "dt_inativacao" => $this->dt_inativacao,

@@ -27,6 +27,17 @@ class AnimalController extends Controller
             throw new ErroGeralException($exception->getMessage());
         }
     }
+    // Animais do usuário
+    public function animaisUsuario(): object
+    {
+        try {
+            return AnimalResource::collection(
+                $this->service->animaisUsuario()
+            );
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
     // Mostrar animais inativos
     public function inativos(): object
     {
@@ -41,11 +52,11 @@ class AnimalController extends Controller
     public function store(Request $request)
     {
         // try {
-            // return new AnimalResource(
-                return $this->service->store(
-                    $request
-                );
-            // );
+        // return new AnimalResource(
+        return $this->service->store(
+            $request
+        );
+        // );
         // } catch (\Exception $exception) {
         //     throw new ErroGeralException($exception->getMessage());
         // }
@@ -61,12 +72,12 @@ class AnimalController extends Controller
     public function update(Request $request, string $id)
     {
         // try {
-            return new AnimalResource(
-                $this->service->update(
-                    $request,
-                    $id
-                )
-            );
+        return new AnimalResource(
+            $this->service->update(
+                $request,
+                $id
+            )
+        );
         // } catch (\Exception $exception) {
         //     throw new ErroGeralException($exception->getMessage());
         // }

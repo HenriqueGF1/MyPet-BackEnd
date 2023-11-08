@@ -30,6 +30,23 @@ class AnimalService
         }
     }
 
+    public function animaisUsuario(): object
+    {
+        try {
+            return $this->model
+            // ->whereNull(
+            //     'dt_inativacao'
+            // )
+            ->where(
+                'id_usuario',
+                '=',
+                UsuarioService::getIdUsuarioLoged()
+            )->paginate();
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
+
     public function inativos(): object
     {
         try {
