@@ -38,11 +38,11 @@ class ContatoController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            return new ContatoResource($this->service->store($request));
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // try {
+        return new ContatoResource($this->service->store($request));
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function definirPrincipal(string $idUsuario, string $idContato)
     {
@@ -54,11 +54,11 @@ class ContatoController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        try {
-            return new ContatoResource($this->service->update($request, $id));
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // try {
+        return new ContatoResource($this->service->update($request, $id));
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function destroy(string $id)
     {
