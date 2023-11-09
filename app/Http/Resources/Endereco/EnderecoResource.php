@@ -22,6 +22,7 @@ class EnderecoResource extends JsonResource
             "numero" => $this->numero,
             "complemento" => $this->complemento,
             "dt_registro" => $this->dt_registro,
+            "principal" => $this->principal,
         ];
     }
 }

@@ -43,23 +43,23 @@ class EnderecoController extends Controller
     }
     public function store(Request $request)
     {
-        try {
-            return new EnderecoResource(
-                $this->service->store($request)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // try {
+        return new EnderecoResource(
+            $this->service->store($request)
+        );
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function update(Request $request, string $id)
     {
-        try {
+        // try {
             return new EnderecoResource(
                 $this->service->update($request, $id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function destroy(string $id)
     {

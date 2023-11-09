@@ -23,7 +23,7 @@ class UsuarioResource extends JsonResource
             "id_perfil" => $this->id_perfil,
             "nome" => $this->nome,
             "email" => $this->email,
-            "password" => $this->password,
+            // "password" => $this->password,
             "idade" => Carbon::parse($this->idade)->format('d/m/Y'),
             "dt_registro" => Carbon::parse($this->dt_registro)->format('d/m/Y H:m:s'),
             "qtd_denuncia" => $this->qtd_denuncia,
