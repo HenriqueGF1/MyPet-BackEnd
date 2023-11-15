@@ -65,6 +65,12 @@ class StoreUpdateDenunciaAnimalRequest extends FormRequest
                     'min:5',
                     'max:255',
                 ],
+                'id_tipo' => [
+                    'required',
+                    Rule::exists('denuncia_tipo')->where(function (Builder $query) {
+                        return $query->where('id_tipo', $this->id_tipo);
+                    }),
+                ],
             ];
         }
 

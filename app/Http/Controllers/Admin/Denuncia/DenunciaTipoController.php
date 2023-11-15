@@ -32,13 +32,13 @@ class DenunciaTipoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        // try {
             return new DenunciaTipoResource(
                 $this->service->store($request)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
 
     /**
@@ -46,13 +46,13 @@ class DenunciaTipoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
+        // try {
             return new DenunciaTipoResource(
                 $this->service->update($request, $id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
 
     /**
@@ -60,32 +60,32 @@ class DenunciaTipoController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
+        // try {
             return new DenunciaTipoResource(
                 $this->service->destroy($id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function inativar(string $id)
     {
-        try {
+        // try {
             return new DenunciaTipoResource(
                 $this->service->inativar($id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function ativar(string $id)
     {
-        try {
+        // try {
             return new DenunciaTipoResource(
                 $this->service->ativar($id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
 }

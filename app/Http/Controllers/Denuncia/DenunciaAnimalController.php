@@ -61,12 +61,12 @@ class DenunciaAnimalController extends Controller
     }
     public function retirarDenuncia(string $id)
     {
-        try {
+        // try {
             return new DenunciaAnimalResource(
                 $this->service->retirarDenuncia($id)
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
 }

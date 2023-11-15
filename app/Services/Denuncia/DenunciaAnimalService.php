@@ -10,7 +10,6 @@ use App\Services\Animal\AnimalService;
 use App\Services\Usuario\UsuarioService;
 use App\Http\Requests\Denuncia\StoreUpdateDenunciaAnimalRequest;
 
-
 class DenunciaAnimalService
 {
     protected $model;
@@ -25,8 +24,13 @@ class DenunciaAnimalService
     public function index()
     {
         try {
-            return $this->model->whereNull(
-                ['dt_inativacao', 'dt_exclusao']
+            // return $this->model->whereNull(
+            //     ['dt_inativacao', 'dt_exclusao']
+            // )->paginate();
+            return $this->model->where(
+                'id_usuario_denunciante',
+                '=',
+                UsuarioService::getIdUsuarioLoged()
             )->paginate();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
@@ -98,9 +102,11 @@ class DenunciaAnimalService
         DB::beginTransaction();
 
         try {
+
             $denuncia = $this->model->findOrFail($id);
 
             $denuncia->descricao = $denunciaDados->validated()['descricao'];
+            $denuncia->id_tipo = $denunciaDados->validated()['id_tipo'];
 
             $denuncia->save();
             DB::commit();
