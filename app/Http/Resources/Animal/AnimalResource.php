@@ -8,6 +8,7 @@ use App\Http\Resources\Animal\FotoAnimalResource;
 use App\Http\Resources\Animal\PorteAnimalResource;
 use App\Http\Resources\Animal\CategoriaAnimalResource;
 use App\Http\Resources\Usuario\UsuarioResource;
+use Carbon\Carbon;
 
 class AnimalResource extends JsonResource
 {
@@ -23,7 +24,8 @@ class AnimalResource extends JsonResource
             "id_animal" => $this->id_animal,
             "nome" => $this->nome,
             "descricao" => $this->descricao,
-            "idade" => $this->idade,
+            // "idade" => Carbon::parse($this->idade)->format('d/m/Y'),
+            "idade" => Carbon::parse($this->idade)->diffInYears(),
             "idadeEUA" =>  date('Y-m-d', strtotime($this->idade)),
             "sexo" => $this->sexo,
             "dt_registro" => $this->dt_registro,
