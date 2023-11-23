@@ -18,13 +18,13 @@ class FavoritoAnimalController extends Controller
 
     public function index()
     {
-        try {
+        // try {
             return FavoritoAnimalResource::collection(
                 $this->service->index()
             );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        // } catch (\Exception $exception) {
+        //     throw new ErroGeralException($exception->getMessage());
+        // }
     }
     public function store(Request $request)
     {

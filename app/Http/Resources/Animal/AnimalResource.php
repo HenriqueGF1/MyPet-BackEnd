@@ -2,13 +2,14 @@
 
 namespace App\Http\Resources\Animal;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Resources\Usuario\UsuarioResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Animal\FotoAnimalResource;
 use App\Http\Resources\Animal\PorteAnimalResource;
+use App\Http\Resources\Animal\FavoritoAnimalResource;
 use App\Http\Resources\Animal\CategoriaAnimalResource;
-use App\Http\Resources\Usuario\UsuarioResource;
-use Carbon\Carbon;
 
 class AnimalResource extends JsonResource
 {
@@ -38,6 +39,7 @@ class AnimalResource extends JsonResource
             'fotos' => FotoAnimalResource::collection($this->fotos),
             "id_usuario" => $this->id_usuario,
             'usuario' => new UsuarioResource($this->usuario),
+            'favoritoUsuario' => $this->favoritoUsuario($this->id_animal),
             "adotado" => $this->adotado,
         ];
     }

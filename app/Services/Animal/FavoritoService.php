@@ -6,6 +6,7 @@ use App\Models\FavoritoAnimal;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
 use App\Http\Requests\Animal\StoreUpdateFavoritoAnimalRequest;
+use App\Services\Usuario\UsuarioService;
 
 class FavoritoService
 {
@@ -20,7 +21,7 @@ class FavoritoService
     public function index()
     {
         try {
-            return $this->model->paginate();
+            return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

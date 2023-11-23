@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\CategoriaAnimal;
+use App\Services\Usuario\UsuarioService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -55,6 +56,15 @@ class Animal extends Model
     {
         return $this->hasMany(FavoritoAnimal::class, 'id_animal', 'id_animal');
     }
+
+    public function favoritoUsuario(int $id_animal)
+    {
+        return $this->favoritos()
+            ->where('id_animal', $id_animal)
+            ->where('id_usuario', UsuarioService::getIdUsuarioLoged())
+            ->get();
+    }
+
     public function denuncias(): HasMany
     {
         return $this->hasMany(DenunciaAnimal::class, 'id_animal', 'id_animal');
