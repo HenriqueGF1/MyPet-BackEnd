@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Denuncia\DenunciaRespostaController;
 // composer dump-autoload
 // php artisan optimize:clear
 
+//
 Route::get('/teste', [UsuarioController::class, 'index']);
 //
 Route::get('/animais', [AnimalController::class, 'index'])->name('animais.index');
