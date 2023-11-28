@@ -57,7 +57,7 @@ class PorteAnimalService
         try {
             $porte = $this->model->create($porteAnimalDados->validated());
             DB::commit();
-            return;
+            return $porte;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

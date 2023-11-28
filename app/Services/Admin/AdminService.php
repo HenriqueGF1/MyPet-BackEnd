@@ -39,7 +39,10 @@ class AdminService
             if ($usuarioPerfil['id_perfil'] == 1) {
                 return $this->respondWithToken($token);
             } else {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json([
+                    'code' => 401,
+                    'error' => 'Unauthorized',
+                ], 401);
             }
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
