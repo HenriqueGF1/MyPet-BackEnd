@@ -16,6 +16,7 @@ class EnderecoController extends Controller
 
     protected $service;
     protected $formRequest;
+
     public function __construct()
     {
         $this->service = new EnderecoService();
@@ -23,60 +24,36 @@ class EnderecoController extends Controller
     }
     public function index(string $id)
     {
-        try {
-            return EnderecoResource::collection(
-                $this->service->index($id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return EnderecoResource::collection(
+            $this->service->index($id)
+        );
     }
     public function show(string $id)
     {
-        try {
-            return new EnderecoResource(
-                $this->service->show($id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new EnderecoResource(
+            $this->service->show($id)
+        );
     }
     public function store(Request $request)
     {
-        // try {
         return new EnderecoResource(
             $this->service->store($request)
         );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
     }
     public function update(Request $request, string $id)
     {
-        // try {
-            return new EnderecoResource(
-                $this->service->update($request, $id)
-            );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
+        return new EnderecoResource(
+            $this->service->update($request, $id)
+        );
     }
     public function destroy(string $id)
     {
-        try {
-            return $this->service->destroy($id);
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->destroy($id);
     }
     public function definirPrincipal(string $idUsuario, string $idEndereco)
     {
-        try {
-            return new EnderecoResource(
-                $this->service->definirPrincipal($idUsuario, $idEndereco)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new EnderecoResource(
+            $this->service->definirPrincipal($idUsuario, $idEndereco)
+        );
     }
 }

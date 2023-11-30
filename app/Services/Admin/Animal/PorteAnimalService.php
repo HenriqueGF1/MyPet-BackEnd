@@ -23,7 +23,7 @@ class PorteAnimalService
         try {
             return $this->model->whereNull(
                 ['dt_inativacao', 'dt_exclusao']
-            )->paginate();
+            )->get();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
@@ -32,7 +32,7 @@ class PorteAnimalService
     public function indexADM()
     {
         try {
-            return $this->model->paginate();
+            return $this->model->all();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

@@ -20,6 +20,16 @@ class DenunciaTipoService
     public function index()
     {
         try {
+            return $this->model->whereNull(
+                ['dt_inativacao', 'dt_exclusao']
+            )->get();
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
+    public function indexADM()
+    {
+        try {
             return $this->model->all();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());

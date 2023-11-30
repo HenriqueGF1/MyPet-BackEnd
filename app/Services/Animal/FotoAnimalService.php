@@ -25,7 +25,7 @@ class FotoAnimalService
         try {
             return $this->model
                 ->where('id_animal', '=', $idAnimal)
-                ->paginate();
+                ->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
@@ -64,7 +64,7 @@ class FotoAnimalService
 
             DB::commit();
 
-            return $this->model->where('id_animal', '=', $idAnimal)->paginate();
+            return $this->model->where('id_animal', '=', $idAnimal)->get();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
@@ -102,7 +102,7 @@ class FotoAnimalService
                 ]);
             }
             DB::commit();
-            return $this->model->where('id_animal', '=', $idAnimal)->paginate();
+            return $this->model->where('id_animal', '=', $idAnimal)->get();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

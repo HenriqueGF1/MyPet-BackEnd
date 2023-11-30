@@ -10,39 +10,29 @@ use App\Http\Resources\Denuncia\DenunciaRespostaResource;
 
 class DenunciaRespostaController extends Controller
 {
+
     private $service;
+
     public function __construct()
     {
         $this->service = new DenunciaRespostaService;
     }
     public function index()
     {
-        try {
-            return DenunciaRespostaResource::collection(
-                $this->service->index()
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return DenunciaRespostaResource::collection(
+            $this->service->index()
+        );
     }
     public function show(string $id)
     {
-        try {
-            return new DenunciaRespostaResource(
-                $this->service->show($id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new DenunciaRespostaResource(
+            $this->service->show($id)
+        );
     }
     public function store(Request $request)
     {
-        try {
-            return new DenunciaRespostaResource(
-                $this->service->validarDenuncia($request)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new DenunciaRespostaResource(
+            $this->service->validarDenuncia($request)
+        );
     }
 }

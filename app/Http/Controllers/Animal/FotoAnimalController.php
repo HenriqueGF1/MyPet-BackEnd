@@ -12,6 +12,7 @@ class FotoAnimalController extends Controller
 {
 
     protected $service;
+
     public function __construct()
     {
         $this->service = new FotoAnimalService();
@@ -19,50 +20,30 @@ class FotoAnimalController extends Controller
 
     public function index(string $idAnimal)
     {
-        try {
-            return FotoAnimalResource::collection(
-                $this->service->index($idAnimal)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return FotoAnimalResource::collection(
+            $this->service->index($idAnimal)
+        );
     }
     public function store(Request $request)
     {
-        try {
-            return FotoAnimalResource::collection(
-                $this->service->store($request)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return FotoAnimalResource::collection(
+            $this->service->store($request)
+        );
     }
     public function show(string $idAnimal, string $idFoto)
     {
-        try {
-            return new FotoAnimalResource(
-                $this->service->show($idAnimal, $idFoto)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new FotoAnimalResource(
+            $this->service->show($idAnimal, $idFoto)
+        );
     }
     public function update(Request $request, string $idAnimal)
     {
-        try {
-            return FotoAnimalResource::collection(
-                $this->service->update($request, $idAnimal)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return FotoAnimalResource::collection(
+            $this->service->update($request, $idAnimal)
+        );
     }
     public function destroy(string $idFotoAnimal)
     {
-        try {
-            return $this->service->destroy($idFotoAnimal);
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->destroy($idFotoAnimal);
     }
 }

@@ -24,7 +24,7 @@ class DenunciaRespostaService
     public function index()
     {
         try {
-            return $this->model->paginate();
+            return $this->model->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

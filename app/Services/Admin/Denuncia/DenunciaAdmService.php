@@ -16,7 +16,7 @@ class DenunciaAdmService
     public function index()
     {
         try {
-            return $this->model->whereNull('dt_inativacao')->paginate();
+            return $this->model->whereNull('dt_inativacao')->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
@@ -32,7 +32,7 @@ class DenunciaAdmService
     public function verificadas()
     {
         try {
-            return $this->model->whereNotNull('dt_inativacao')->paginate();
+            return $this->model->whereNotNull('dt_inativacao')->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
@@ -40,7 +40,7 @@ class DenunciaAdmService
     public function retiradas()
     {
         try {
-            return $this->model->whereNotNull('dt_exclusao')->paginate();
+            return $this->model->whereNotNull('dt_exclusao')->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

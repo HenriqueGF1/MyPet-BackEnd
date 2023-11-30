@@ -19,117 +19,76 @@ class AnimalController extends Controller
 
     public function index(): object
     {
-        try {
-            return AnimalResource::collection(
-                $this->service->index()
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return AnimalResource::collection(
+            $this->service->index()
+        );
     }
     // Animais do usuário
     public function animaisUsuario(): object
     {
-        try {
-            return AnimalResource::collection(
-                $this->service->animaisUsuario()
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return AnimalResource::collection(
+            $this->service->animaisUsuario()
+        );
     }
     // Mostrar animais inativos
     public function inativos(): object
     {
-        try {
-            return AnimalResource::collection(
-                $this->service->inativos()
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return AnimalResource::collection(
+            $this->service->inativos()
+        );
     }
     public function store(Request $request)
     {
-        // try {
         // return new AnimalResource(
         return $this->service->store(
             $request
         );
-        // );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
     }
     public function show(string $id): object
     {
-        try {
-            return new AnimalResource($this->service->show($id));
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new AnimalResource($this->service->show($id));
     }
     public function update(Request $request, string $id)
     {
-        // try {
         return new AnimalResource(
             $this->service->update(
                 $request,
                 $id
             )
         );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
     }
     public function destroy(string $id)
     {
-        try {
-            return $this->service->destroy(
-                $id
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->destroy(
+            $id
+        );
     }
     // Desativar animal
     public function desativarAnimal(string $id)
     {
-        try {
-            return new AnimalResource(
-                $this->service->desativarAnimal(
-                    $id
-                )
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new AnimalResource(
+            $this->service->desativarAnimal(
+                $id
+            )
+        );
     }
     // Ativar animal
     public function ativarAnimal(string $id)
     {
-        try {
-            return new AnimalResource(
-                $this->service->ativarAnimal(
-                    $id
-                )
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new AnimalResource(
+            $this->service->ativarAnimal(
+                $id
+            )
+        );
     }
     //
     public function adotado(string $id, Request $request)
     {
-        try {
-            return new AnimalResource(
-                $this->service->adotado(
-                    $id,
-                    $request
-                )
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new AnimalResource(
+            $this->service->adotado(
+                $id,
+                $request
+            )
+        );
     }
 }

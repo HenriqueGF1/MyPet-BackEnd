@@ -24,14 +24,11 @@ class DenunciaAnimalService
     public function index()
     {
         try {
-            // return $this->model->whereNull(
-            //     ['dt_inativacao', 'dt_exclusao']
-            // )->paginate();
             return $this->model->where(
                 'id_usuario_denunciante',
                 '=',
                 UsuarioService::getIdUsuarioLoged()
-            )->paginate();
+            )->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

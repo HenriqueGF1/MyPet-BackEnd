@@ -31,6 +31,17 @@ class UsuarioService
             'valid' => auth()->check()
         ]);
     }
+
+    public function checkPerfil()
+    {
+        try {
+            $perfil = $this->model->findOrFail($this->getIdUsuarioLoged())->perfil_usuario()->orderBy('id_perfil', 'asc')->first();
+            return $perfil;
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
+
     public function login(LoginUsuarioRequest $request)
     {
         $credentials = $request->validated();

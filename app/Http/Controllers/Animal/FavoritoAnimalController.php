@@ -10,7 +10,9 @@ use App\Http\Resources\Animal\FavoritoAnimalResource;
 
 class FavoritoAnimalController extends Controller
 {
+
     protected $service;
+
     public function __construct()
     {
         $this->service = new FavoritoService();
@@ -18,30 +20,18 @@ class FavoritoAnimalController extends Controller
 
     public function index()
     {
-        // try {
-            return FavoritoAnimalResource::collection(
-                $this->service->index()
-            );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
+        return FavoritoAnimalResource::collection(
+            $this->service->index()
+        );
     }
     public function store(Request $request)
     {
-        try {
-            return new FavoritoAnimalResource(
-                $this->service->store($request)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new FavoritoAnimalResource(
+            $this->service->store($request)
+        );
     }
     public function destroy(string $id)
     {
-        try {
-            return $this->service->destroy($id);
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->destroy($id);
     }
 }

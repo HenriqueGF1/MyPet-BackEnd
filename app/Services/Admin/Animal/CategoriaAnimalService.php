@@ -20,13 +20,23 @@ class CategoriaAnimalService
     }
     public function index()
     {
-        return $this->model->whereNull(
-            ['dt_inativacao', 'dt_exclusao']
-        )->paginate();
+        try {
+            return $this->model->whereNull(
+                ['dt_inativacao', 'dt_exclusao']
+            )->get();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw new ErroGeralException($exception->getMessage());
+        }
     }
     public function indexADM()
     {
-        return $this->model->paginate();
+        try {
+            return $this->model->all();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw new ErroGeralException($exception->getMessage());
+        }
     }
     public function show(string $id)
     {
@@ -76,7 +86,7 @@ class CategoriaAnimalService
     {
 
         DB::beginTransaction();
-        
+
         try {
             $categoria = $this->model->findOrFail($id)->delete();
             DB::commit();

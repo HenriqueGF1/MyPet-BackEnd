@@ -22,7 +22,7 @@ class ContatoService
     public function index()
     {
         try {
-            return $this->model->paginate()->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged());
+            return $this->model->get()->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged());
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

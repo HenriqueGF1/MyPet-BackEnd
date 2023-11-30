@@ -24,24 +24,20 @@ class AnimalService
         try {
             return $this->model->whereNull(
                 'dt_inativacao'
-            )->paginate();
+            )->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
-
     public function animaisUsuario(): object
     {
         try {
             return $this->model
-            // ->whereNull(
-            //     'dt_inativacao'
-            // )
-            ->where(
-                'id_usuario',
-                '=',
-                UsuarioService::getIdUsuarioLoged()
-            )->paginate();
+                ->where(
+                    'id_usuario',
+                    '=',
+                    UsuarioService::getIdUsuarioLoged()
+                )->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
@@ -56,7 +52,7 @@ class AnimalService
                 'id_usuario',
                 '=',
                 UsuarioService::getIdUsuarioLoged()
-            )->paginate();
+            )->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Animal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Exceptions\ErroGeralException;
 use App\Services\Admin\Animal\CategoriaAnimalService;
 use App\Http\Resources\Animal\CategoriaAnimalResource;
 
@@ -11,11 +12,11 @@ class CategoriaAnimalController extends Controller
 {
 
     protected $service;
+
     public function __construct()
     {
         $this->service = new CategoriaAnimalService();
     }
-
     public function index()
     {
         return CategoriaAnimalResource::collection(

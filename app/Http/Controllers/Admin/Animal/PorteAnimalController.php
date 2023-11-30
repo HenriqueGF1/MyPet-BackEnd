@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin\Animal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Exceptions\ErroGeralException;
 use App\Services\Admin\Animal\PorteAnimalService;
 use App\Http\Resources\Animal\PorteAnimalResource;
 
 
 class PorteAnimalController extends Controller
 {
+
     protected $service;
+
     public function __construct()
     {
         $this->service = new PorteAnimalService();

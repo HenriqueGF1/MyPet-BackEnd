@@ -13,73 +13,50 @@ class UsuarioController extends Controller
 {
 
     protected $service;
+
     public function __construct()
     {
         $this->service = new UsuarioService();
     }
     public function show(string $id)
     {
-        try {
-            return new UsuarioResource(
-                $this->service->show($id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new UsuarioResource(
+            $this->service->show($id)
+        );
     }
     public function checkToken()
     {
-        try {
-            return $this->service->checkToken();
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->checkToken();
+    }
+    public function checkPerfil()
+    {
+        return $this->service->checkPerfil();
     }
     public function login(LoginUsuarioRequest $request)
     {
-        try {
-            return $this->service->login($request);
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->login($request);
     }
     public function logout()
     {
-        try {
-            return $this->service->logout();
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->logout();
     }
     public function store(Request $request)
     {
-        // try {
-            return $this->service->store(
-                $request
-            );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
+        return $this->service->store(
+            $request
+        );
     }
     public function update(Request $request, string $id)
     {
-        try {
-            return new UsuarioResource(
-                $this->service->update(
-                    $request,
-                    $id
-                )
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new UsuarioResource(
+            $this->service->update(
+                $request,
+                $id
+            )
+        );
     }
     public function destroy(string $id)
     {
-        try {
-            return $this->service->destroy($id);
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return $this->service->destroy($id);
     }
 }

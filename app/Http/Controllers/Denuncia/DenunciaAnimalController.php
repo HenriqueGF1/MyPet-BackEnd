@@ -13,6 +13,7 @@ class DenunciaAnimalController extends Controller
 {
     protected $service;
     protected $formRequest;
+
     public function __construct()
     {
         $this->service = new DenunciaAnimalService();
@@ -21,52 +22,32 @@ class DenunciaAnimalController extends Controller
 
     public function index()
     {
-        try {
-            return DenunciaAnimalResource::collection(
-                $this->service->index()
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return DenunciaAnimalResource::collection(
+            $this->service->index()
+        );
     }
     public function store(Request $request)
     {
-        try {
-            return new DenunciaAnimalResource(
-                $this->service->store($request)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new DenunciaAnimalResource(
+            $this->service->store($request)
+        );
     }
     public function show(string $id)
     {
-        try {
-            return new DenunciaAnimalResource(
-                $this->service->show($id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new DenunciaAnimalResource(
+            $this->service->show($id)
+        );
     }
     public function update(Request $request, string $id)
     {
-        try {
-            return new DenunciaAnimalResource(
-                $this->service->update($request, $id)
-            );
-        } catch (\Exception $exception) {
-            throw new ErroGeralException($exception->getMessage());
-        }
+        return new DenunciaAnimalResource(
+            $this->service->update($request, $id)
+        );
     }
     public function retirarDenuncia(string $id)
     {
-        // try {
-            return new DenunciaAnimalResource(
-                $this->service->retirarDenuncia($id)
-            );
-        // } catch (\Exception $exception) {
-        //     throw new ErroGeralException($exception->getMessage());
-        // }
+        return new DenunciaAnimalResource(
+            $this->service->retirarDenuncia($id)
+        );
     }
 }
