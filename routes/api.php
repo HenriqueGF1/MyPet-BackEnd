@@ -89,6 +89,9 @@ Route::prefix('admin')->middleware(['admin.acesso'])->group(function () {
         //
         Route::get('denuncias/tipos', 'indexADM')->name('admDenunciaTipo.index');
         //
+        Route::get('denunciasTipos/{id}', 'show')->name('admDenunciaTipo.show')
+            ->where('id', '[0-9]+');
+        //
         Route::post('denuncias/tipos', 'store')->name('admDenunciaTipo.store');
         //
         Route::patch('denuncias/tipos/{idTipo}', 'update')->name('admDenunciaTipo.update')

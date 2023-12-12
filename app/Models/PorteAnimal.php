@@ -12,10 +12,8 @@ class PorteAnimal extends Model
 
     protected $table = 'porte_animal';
     protected $primaryKey = 'id_porte';
-    public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
-        "id_porte",
         "descricao",
         "dt_registro",
         "dt_inativacao"

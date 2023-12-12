@@ -23,12 +23,12 @@ class StoreUpdateFotoAnimalRequest extends FormRequest
                 // 'mimes:jpeg,png,jpg',
                 // 'max:8192',
             ],
-            // 'id_animal' => [
-            //     'required',
-            //     Rule::exists('animal')->where(function (Builder $query) {
-            //         return $query->where('id_animal', $this->id_animal);
-            //     }),
-            // ],
+            'id_animal' => [
+                'required',
+                Rule::exists('animal')->where(function (Builder $query) {
+                    return $query->where('id_animal', $this->id_animal);
+                }),
+            ],
         ];
 
         if (!empty($this->id_foto_animal)) {
@@ -46,12 +46,12 @@ class StoreUpdateFotoAnimalRequest extends FormRequest
                         return $query->where('id_animal', $this->id_animal)->whereIn('id_foto_animal', [(array) $this->id_foto_animal]);
                     }),
                 ],
-                // 'id_animal' => [
-                //     'required',
-                //     Rule::exists('animal')->where(function (Builder $query) {
-                //         return $query->where('id_animal', $this->id_animal);
-                //     }),
-                // ],
+                'id_animal' => [
+                    'required',
+                    Rule::exists('animal')->where(function (Builder $query) {
+                        return $query->where('id_animal', $this->id_animal);
+                    }),
+                ],
             ];
         }
 

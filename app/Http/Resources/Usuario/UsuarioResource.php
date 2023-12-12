@@ -20,7 +20,7 @@ class UsuarioResource extends JsonResource
         // dd($this);
         return [
             "id_usuario" => $this->id_usuario,
-            "id_perfil" => $this->id_perfil,
+            "perfil_usuario" => $this->perfil_usuario,
             "nome" => $this->nome,
             "email" => $this->email,
             // "password" => $this->password,

@@ -14,10 +14,8 @@ class FavoritoAnimal extends Model
 
     protected $table = 'favorito_animal';
     protected $primaryKey = 'id_favorito';
-    public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
-        "id_favorito",
         "id_usuario",
         "id_animal"
     ];

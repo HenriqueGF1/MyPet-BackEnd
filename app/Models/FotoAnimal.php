@@ -22,8 +22,12 @@ class FotoAnimal extends Model
         "id_animal"
     ];
 
-    public function animal(): BelongsToMany
+    // public function animal(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Animal::class, 'id_animal', 'id_animal');
+    // }
+    public function animal()
     {
-        return $this->belongsToMany(Animal::class, 'id_animal', 'id_animal');
+        return $this->belongsTo(Animal::class, 'id_animal', 'id_animal');
     }
 }

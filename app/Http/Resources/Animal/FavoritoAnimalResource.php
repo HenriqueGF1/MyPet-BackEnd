@@ -15,13 +15,12 @@ class FavoritoAnimalResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this);
         return [
             "id_favorito" => $this->id_favorito,
             "id_usuario" => $this->id_usuario,
+            "dt_registro" => $this->dt_registro,
             "id_animal" => $this->id_animal,
-            "animal" => new AnimalResource($this->animal),
-            "dt_registro" => $this->dt_registro
+            "animal" => new AnimalResource($this->animal)
         ];
     }
 }

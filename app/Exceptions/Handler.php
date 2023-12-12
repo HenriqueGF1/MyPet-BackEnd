@@ -27,10 +27,10 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $exception) {
         });
 
-        $this->renderable(function (Throwable $exception, $request) {
-            if ($request->is('api/*') && !$exception instanceof ValidationException) {
-                throw new ErroGeralException($exception->getMessage());
-            }
-        });
+        // $this->renderable(function (Throwable $exception, $request) {
+        //     if ($request->is('api/*') && !$exception instanceof ValidationException) {
+        //         throw new ErroGeralException($exception->getMessage());
+        //     }
+        // });
     }
 }

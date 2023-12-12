@@ -36,7 +36,13 @@ class AnimalResource extends JsonResource
             'categoria' => new CategoriaAnimalResource($this->categoria),
             "id_porte" => $this->id_porte,
             'porte' => new PorteAnimalResource($this->porte),
-            'fotos' => FotoAnimalResource::collection($this->fotos),
+            // 'fotos' => FotoAnimalResource::collection($this->fotos),
+            'fotos' => $this->unless(
+                $request->routeIs('animaisFoto.index'), // Exclui a relação 'fotos' se a rota for 'animaisFoto.index'
+                function () {
+                    return FotoAnimalResource::collection($this->fotos);
+                }
+            ),
             "id_usuario" => $this->id_usuario,
             'usuario' => new UsuarioResource($this->usuario),
             'favoritoUsuario' => $this->favoritoUsuario($this->id_animal),

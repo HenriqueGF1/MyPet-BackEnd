@@ -81,7 +81,6 @@ class FotoAnimalService
 
             $idAnimal = $fotoAnimalDados->validated()['id_animal'];
 
-
             $fotoAntigas = $this->model->whereIn('id_foto_animal', explode(",", $fotoAnimalDados->validated()['id_foto_animal']))->get();
 
             foreach ($fotoAntigas as $fotoAntiga) {

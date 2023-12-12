@@ -14,13 +14,20 @@ class FotoAnimalResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            "id_foto_animal" => $this->id_foto_animal,
-            "nome_arquivo" => $this->nome_arquivo,
-            "nome_arquivo_original" => $this->nome_arquivo_original,
-            "url" => $this->url,
-            "dt_registro" => $this->dt_registro,
-            "id_animal" => $this->id_animal
+        $response = [
+            'id_foto_animal' => $this->id_foto_animal,
+            'nome_arquivo' => $this->nome_arquivo,
+            'nome_arquivo_original' => $this->nome_arquivo_original,
+            'url' => $this->url,
+            'dt_registro' => $this->dt_registro,
+            'id_animal' => $this->id_animal,
         ];
+
+        // Verifica se a rota é animaisFoto.index
+        if ($request->routeIs('animaisFoto.index')) {
+            $response['animal'] = new AnimalResource($this->animal);
+        }
+
+        return $response;
     }
 }

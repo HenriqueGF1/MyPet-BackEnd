@@ -30,6 +30,12 @@ class DenunciaTipoController extends Controller
             $this->service->indexADM()
         );
     }
+    public function show(string $id)
+    {
+        return new DenunciaTipoResource(
+            $this->service->show($id)
+        );
+    }
     public function store(Request $request)
     {
         return new DenunciaTipoResource(

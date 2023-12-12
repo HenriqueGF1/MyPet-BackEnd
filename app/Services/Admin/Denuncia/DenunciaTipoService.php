@@ -35,6 +35,15 @@ class DenunciaTipoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+    public function show(string $id)
+    {
+        try {
+            return $this->model->findOrFail($id);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
     public function store($request)
     {
         $dadosRequest = app($this->formRequest::class, $request->toArray());
