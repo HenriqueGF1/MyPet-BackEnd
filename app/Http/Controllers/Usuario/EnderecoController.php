@@ -22,10 +22,10 @@ class EnderecoController extends Controller
         $this->service = new EnderecoService();
         $this->formRequest = new StoreUpdateEnderecoRequest();
     }
-    public function index(string $id)
+    public function index()
     {
         return EnderecoResource::collection(
-            $this->service->index($id)
+            $this->service->index()
         );
     }
     public function show(string $id)
@@ -50,10 +50,10 @@ class EnderecoController extends Controller
     {
         return $this->service->destroy($id);
     }
-    public function definirPrincipal(string $idUsuario, string $idEndereco)
+    public function definirPrincipal(string $idEndereco)
     {
         return new EnderecoResource(
-            $this->service->definirPrincipal($idUsuario, $idEndereco)
+            $this->service->definirPrincipal($idEndereco)
         );
     }
 }

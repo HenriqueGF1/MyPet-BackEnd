@@ -20,4 +20,8 @@ class AdminController extends Controller
     {
         return $this->service->login($request);
     }
+    public function dashBoard()
+    {
+        return $this->service->dashBoard();
+    }
 }

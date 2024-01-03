@@ -12,6 +12,8 @@ use App\Http\Requests\Usuario\StoreUpdateUsuarioRequest;
 use App\Services\Usuario\Contato\ContatoService;
 use App\Services\Usuario\Endereco\EnderecoService;
 
+use function PHPUnit\Framework\isNull;
+
 class UsuarioService
 {
     protected $model;
@@ -35,8 +37,18 @@ class UsuarioService
     public function checkPerfil()
     {
         try {
-            $perfil = $this->model->findOrFail($this->getIdUsuarioLoged())->perfil_usuario()->orderBy('id_perfil', 'asc')->first();
-            return $perfil;
+            if ($this->getIdUsuarioLoged() != null) {
+                $perfil = $this->model->findOrFail($this->getIdUsuarioLoged())->perfil_usuario()->orderBy('id_perfil', 'asc')->first();
+                return response()->json([
+                    'code' =>  200,
+                    'perfil' => $perfil
+                ]);
+            } else {
+                return response()->json([
+                    'code' =>  401,
+                    'perfil' => null
+                ]);
+            }
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
@@ -47,7 +59,9 @@ class UsuarioService
         $credentials = $request->validated();
 
         if (!$token = Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                'data' => 'Usuario ou Senha Incorretos'
+            ], 401);
         }
 
         return $this->respondWithToken($token);
@@ -116,7 +130,7 @@ class UsuarioService
             $contatoService->checarContatoPrincipal($usuario->id_usuario, $contato->id_contato);
 
             $validados = $usuarioRequest->safe()->merge([
-                "numero" => $usuarioRequest->validated()['numero_endereco'],
+                'numero' => str_replace("-", "", $usuarioRequest->validated()['numero_endereco'])
             ]);
 
             $endereco = $usuario->enderecos()->create($validados->toArray());

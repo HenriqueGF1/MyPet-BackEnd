@@ -17,7 +17,9 @@ class PorteAnimalResource extends JsonResource
         return [
             "id_porte" => $this->id_porte,
             "descricao" => $this->descricao,
-            "dt_inativacao" => $this->dt_inativacao
+            "dt_registro" => $this->dt_registro,
+            "dt_inativacao" => $this->dt_inativacao,
+            "dt_exclusao" => $this->dt_exclusao
         ];
     }
 }

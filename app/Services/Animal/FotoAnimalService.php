@@ -49,7 +49,6 @@ class FotoAnimalService
         try {
 
             $fotos = $fotoAnimalDados->validated()['imagens'];
-
             $idAnimal = $fotoAnimalDados->validated()['id_animal'];
 
             foreach ($fotos as $foto) {
@@ -57,7 +56,7 @@ class FotoAnimalService
                 $animalsFotos = $this->model->create([
                     "nome_arquivo" => $foto->hashName(),
                     "nome_arquivo_original" => $foto->getClientOriginalName(),
-                    "url" => $foto->store('animais/' . $idAnimal, 'public'),
+                    "url" => $foto->store('animais/' . $idAnimal),
                     "id_animal" => $idAnimal
                 ]);
             }
@@ -84,7 +83,7 @@ class FotoAnimalService
             $fotoAntigas = $this->model->whereIn('id_foto_animal', explode(",", $fotoAnimalDados->validated()['id_foto_animal']))->get();
 
             foreach ($fotoAntigas as $fotoAntiga) {
-                Storage::disk('public')->delete($fotoAntiga->url);
+                Storage::disk('public')->delete(unlink($fotoAntiga->url));
             }
 
             $this->model->whereIn('id_foto_animal', explode(",", $fotoAnimalDados->validated()['id_foto_animal']))->delete();
@@ -96,7 +95,7 @@ class FotoAnimalService
                 $this->model->create([
                     "nome_arquivo" => $fotosNova->hashName(),
                     "nome_arquivo_original" => $fotosNova->getClientOriginalName(),
-                    "url" => $fotosNova->store('animais/' . $idAnimal, 'public'),
+                    "url" => $fotosNova->store('animais/' . $idAnimal),
                     "id_animal" => $idAnimal
                 ]);
             }
@@ -108,21 +107,28 @@ class FotoAnimalService
         }
     }
 
-    public function destroy($idFotoAnimal)
+    public function destroy($request, $idAnimal)
     {
+
+        $fotoAnimalDados = app($this->formRequest::class, $request->toArray());
 
         DB::beginTransaction();
 
         try {
 
-            $foto = $this->model->findOrFail($idFotoAnimal);
+            $idAnimal = $fotoAnimalDados->validated()['id_animal'];
 
-            Storage::disk('public')->delete($foto->url);
+            $fotos = $this->model->whereIn('id_foto_animal', explode(",", $fotoAnimalDados->validated()['id_foto_animal']))->get();
 
-            $fotoAnimal = $this->model->findOrFail($idFotoAnimal)->delete();
+            foreach ($fotos as $foto) {
+                Storage::disk('public')->delete(unlink($foto->url));
+            }
+
+            $this->model->whereIn('id_foto_animal', explode(",", $fotoAnimalDados->validated()['id_foto_animal']))->delete();
 
             DB::commit();
-            return $fotoAnimal;
+
+            return $this->model->where('id_animal', '=', $idAnimal)->get();
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

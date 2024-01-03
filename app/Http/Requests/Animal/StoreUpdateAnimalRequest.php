@@ -111,8 +111,6 @@ class StoreUpdateAnimalRequest extends FormRequest
             ];
         }
 
-        // dd($regras);
-
         return $regras;
     }
     public function messages(): array

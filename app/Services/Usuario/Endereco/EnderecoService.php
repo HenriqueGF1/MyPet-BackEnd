@@ -20,10 +20,10 @@ class EnderecoService
         $this->formRequest = new StoreUpdateEnderecoRequest();
     }
 
-    public function index(string $id)
+    public function index()
     {
         try {
-            return $this->model->where('id_usuario', '=', $id)
+            return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())
                 ->orderBy('id_endereco')
                 ->get();
         } catch (\Exception $exception) {
@@ -75,14 +75,14 @@ class EnderecoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function definirPrincipal(string $idUsuario, string $idEndereco): object
+    public function definirPrincipal(string $idEndereco): object
     {
 
         DB::beginTransaction();
 
         try {
 
-            $this->model->where('id_usuario', $idUsuario)->update([
+            $this->model->where('id_usuario', UsuarioService::getIdUsuarioLoged())->update([
                 'principal' => 0
             ]);
 

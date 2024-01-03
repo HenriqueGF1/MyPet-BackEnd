@@ -30,23 +30,15 @@ class AnimalController extends Controller
             $this->service->animaisUsuario()
         );
     }
-    // Mostrar animais inativos
-    public function inativos(): object
-    {
-        return AnimalResource::collection(
-            $this->service->inativos()
-        );
-    }
-    public function store(Request $request)
-    {
-        // return new AnimalResource(
-        return $this->service->store(
-            $request
-        );
-    }
     public function show(string $id): object
     {
         return new AnimalResource($this->service->show($id));
+    }
+    public function store(Request $request)
+    {
+        return $this->service->store(
+            $request
+        );
     }
     public function update(Request $request, string $id)
     {
@@ -61,6 +53,13 @@ class AnimalController extends Controller
     {
         return $this->service->destroy(
             $id
+        );
+    }
+    // Mostrar animais inativos
+    public function inativos(): object
+    {
+        return AnimalResource::collection(
+            $this->service->inativos()
         );
     }
     // Desativar animal

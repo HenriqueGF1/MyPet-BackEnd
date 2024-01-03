@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Exceptions\ErroGeralException;
 use App\Http\Resources\Usuario\UsuarioResource;
 use App\Http\Requests\Usuario\LoginUsuarioRequest;
+use App\Models\Animal;
+use App\Models\DenunciaAnimal;
 
 class AdminService
 {
@@ -65,6 +67,34 @@ class AdminService
                     'expires_in' => Auth::factory()->getTTL() * 60,
                 ],
             ]);
+        } catch (\Exception $exception) {
+            throw new ErroGeralException($exception->getMessage());
+        }
+    }
+    public function dashBoard()
+    {
+        try {
+            // Usuario
+            $usuario = Usuario::all();
+            // Animal
+            $animal = Animal::all();
+            $animaisQtdDenuncias = Animal::sum('qtd_denuncia');
+            $animaisAdotados = Animal::where('adotado', '=', '1')->get();
+            $animaisNaoAdotados = Animal::where('adotado', '=', '0')->get();
+            $animaisMasculinos = Animal::where('sexo', '=', 'M')->get();
+            $animaisFemininos = Animal::where('sexo', '=', 'F')->get();
+
+            return [
+                'data' => [
+                    'usuario' => $usuario->count(),
+                    'animal' => $animal->count(),
+                    'animaisQtdDenuncias' => $animaisQtdDenuncias,
+                    'animaisAdotados' => $animaisAdotados->count(),
+                    'animaisNaoAdotados' => $animaisNaoAdotados->count(),
+                    'animaisMasculinos' => $animaisMasculinos->count(),
+                    'animaisFemininos' => $animaisFemininos->count()
+                ]
+            ];
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }

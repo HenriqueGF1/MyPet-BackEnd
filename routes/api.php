@@ -25,6 +25,9 @@ Route::get('/checkPerfil', [UsuarioController::class, 'checkPerfil'])->name('usu
 
 // ANIMAL
 Route::get('/animais', [AnimalController::class, 'index'])->name('animais.index');
+Route::get('/animais/{id}', [AnimalController::class, 'show'])
+    ->where('id', '[0-9]+')
+    ->name('animais.show');
 
 // USUÁRIO
 Route::post('/create', [UsuarioController::class, 'store'])->name('usuario.store');
@@ -38,10 +41,12 @@ Route::prefix('admin')->middleware(['admin.acesso'])->group(function () {
 
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'index')->name('admin.index');
+        Route::get('/dashBoard', 'dashBoard')->name('admin.dashBoard');
     });
 
     // ADMIN PORTE_ANIMAL
     Route::controller(PorteAnimalController::class)->group(function (): void {
+
         Route::get('/porteAnimais', 'indexADM')->name('admPorteAnimais.indexADM');
         //
         Route::get('/porteAnimais/{id}', 'show')->name('admPorteAnimais.show')
@@ -188,9 +193,9 @@ Route::middleware(['jwt.verify', 'usuario.acesso'])->group(function () {
         Route::post('/animais', 'store')
             ->name('animais.store');
         //
-        Route::get('/animais/{id}', 'show')
-            ->where('id', '[0-9]+')
-            ->name('animais.show');
+        // Route::get('/animais/{id}', 'show')
+        //     ->where('id', '[0-9]+')
+        //     ->name('animais.show');
         //
         Route::patch('/animais/{id}', 'update')
             ->where('id', '[0-9]+')
@@ -235,14 +240,14 @@ Route::middleware(['jwt.verify', 'usuario.acesso'])->group(function () {
             ->where('idAnimal', '[0-9]+')
             ->name('animaisFoto.update');
         //
-        Route::delete('/animais/fotos/{idFotoAnimal}', 'destroy')
-            ->where('idFotoAnimal', '[0-9]+')
+        Route::post('/animais/{idAnimal}/fotos/apagar', 'destroy')
+            ->where('idAnimal', '[0-9]+')
             ->name('animaisFoto.destroy');
     });
 
     // USUÁRIO ENDEREÇO
     Route::controller(EnderecoController::class)->group(function (): void {
-        Route::get('usuarios/{id}/enderecos', 'index')
+        Route::get('usuarios/enderecos', 'index')
             ->name('enderecos.index');
         //
         Route::get('/enderecos/{id}', 'show')
@@ -260,8 +265,7 @@ Route::middleware(['jwt.verify', 'usuario.acesso'])->group(function () {
             ->where('id', '[0-9]+')
             ->name('enderecos.destroy');
         //
-        Route::patch('/usuarios/{idUsuario}/enderecos/{idEndereco}/definirPrincipal', 'definirPrincipal')
-            ->where('idUsuario', '[0-9]+')
+        Route::patch('/usuarios/enderecos/{idEndereco}/definirPrincipal', 'definirPrincipal')
             ->where('idEndereco', '[0-9]+')
             ->name('enderecos.definirPrincipal');
     });

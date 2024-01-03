@@ -17,7 +17,6 @@ class UsuarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this);
         return [
             "id_usuario" => $this->id_usuario,
             "perfil_usuario" => $this->perfil_usuario,

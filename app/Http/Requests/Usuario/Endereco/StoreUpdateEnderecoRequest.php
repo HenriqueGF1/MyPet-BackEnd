@@ -22,8 +22,6 @@ class StoreUpdateEnderecoRequest extends FormRequest
     public function rules(): array
     {
 
-        // dd($this->getMethod());
-
         $regras = [
             'cep' => [
                 'required',

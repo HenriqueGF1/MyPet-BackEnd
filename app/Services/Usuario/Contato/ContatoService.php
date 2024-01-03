@@ -45,7 +45,8 @@ class ContatoService
         try {
 
             $validados = $contatoDados->safe()->merge([
-                "id_usuario" => UsuarioService::getIdUsuarioLoged()
+                "id_usuario" => UsuarioService::getIdUsuarioLoged(),
+                'numero' => str_replace("-", "", $contatoDados->numero)
             ]);
 
             $contato = $this->model->create($validados->toArray());
@@ -110,7 +111,7 @@ class ContatoService
             $contato = $this->model->where('id_contato', '=', $id)->firstOrFail();
 
             $contato->dd = $contatoValidado['dd'];
-            $contato->numero = $contatoValidado['numero'];
+            $contato->numero = str_replace("-", "", $contatoDados->numero);
 
             $contato->save();
 

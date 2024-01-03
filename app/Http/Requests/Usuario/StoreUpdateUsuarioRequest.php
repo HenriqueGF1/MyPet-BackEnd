@@ -74,8 +74,6 @@ class StoreUpdateUsuarioRequest extends FormRequest
             ];
         }
 
-        // dd($regras);
-
         return $regras;
     }
 }

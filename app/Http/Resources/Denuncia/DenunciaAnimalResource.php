@@ -16,8 +16,6 @@ class DenunciaAnimalResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this);
-
         return [
             "id_denuncia" => $this->id_denuncia,
             "descricao" => $this->descricao,

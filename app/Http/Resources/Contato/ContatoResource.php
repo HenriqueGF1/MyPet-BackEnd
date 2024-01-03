@@ -17,12 +17,12 @@ class ContatoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd(Usuario::find($this->id_usuario));
         return [
             "id_contato" => $this->id_contato,
             "id_usuario" => $this->id_usuario,
             // 'usuario' => new UsuarioResource($this->whenLoaded('usuario')),
-            'usuario' => Usuario::find($this->id_usuario),
+            'usuario' => Usuario::where('id_usuario', $this->id_usuario)->get(['nome', 'email', 'idade']),
+            // 'usuario' => Usuario::find($this->id_usuario),
             "dd" => $this->dd,
             "numero" => $this->numero,
             "numero_completo" => "(" . $this->dd . ") " . $this->numero,

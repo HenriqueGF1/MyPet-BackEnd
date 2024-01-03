@@ -42,8 +42,8 @@ class FotoAnimalController extends Controller
             $this->service->update($request, $idAnimal)
         );
     }
-    public function destroy(string $idFotoAnimal)
+    public function destroy(Request $request, string $idAnimal)
     {
-        return $this->service->destroy($idFotoAnimal);
+        return $this->service->destroy($request, $idAnimal);
     }
 }

@@ -130,7 +130,7 @@ class AnimalService
             $animalFotos = $animal->with('fotos')->where(['id_animal' => $idAnimal])->get();
 
             foreach ($animalFotos[0]['fotos'] as $animalFoto) {
-                Storage::disk('public')->delete($animalFoto->url);
+                Storage::deleteDirectory(public_path('animais/' . $idAnimal));
             }
 
             $animal->fotos()->where(['id_animal' => $idAnimal])->delete();
