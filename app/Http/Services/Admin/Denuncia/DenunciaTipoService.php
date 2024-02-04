@@ -1,132 +1,150 @@
 <?php
 
-namespace App\Services\Admin\Animal;
+namespace App\Http\Services\Admin\Denuncia;
 
 use Carbon\Carbon;
-use App\Models\CategoriaAnimal;
+use App\Models\DenunciaTipo;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
-use App\Http\Requests\Animal\StoreUpdateCategoriaAnimalRequest;
+use App\Http\Requests\Denuncia\StoreUpdateDenunciaTipoRequest;
 
-class CategoriaAnimalService
+class DenunciaTipoService
 {
+
     protected $model;
     protected $formRequest;
 
     public function __construct()
     {
-        $this->model = new CategoriaAnimal();
-        $this->formRequest = new StoreUpdateCategoriaAnimalRequest();
+        $this->model = new DenunciaTipo();
+        $this->formRequest = new StoreUpdateDenunciaTipoRequest();
     }
+
     public function index()
     {
+
         try {
             return $this->model->whereNull(
                 ['dt_inativacao', 'dt_exclusao']
             )->get();
         } catch (\Exception $exception) {
-            DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function indexADM()
     {
+
         try {
             return $this->model->all();
         } catch (\Exception $exception) {
-            DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function show(string $id)
     {
+
         try {
             return $this->model->findOrFail($id);
         } catch (\Exception $exception) {
+            DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 
-        $categoriaAnimalDados = app($this->formRequest::class, $request->toArray());
+        $dadosRequest = app($this->formRequest::class, $request->toArray());
 
         DB::beginTransaction();
 
         try {
-            $categoria = $this->model->create((array) $categoriaAnimalDados->validated());
+            $tipoDenuncia = $this->model->create($dadosRequest->validated());
             DB::commit();
-            return $categoria;
+            return $tipoDenuncia;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function update($request, string $id)
+
+    public function update($request, $id)
     {
 
-        $categoriaAnimalDados = app($this->formRequest::class,  $request->toArray());
+        $dadosRequest = app($this->formRequest::class, $request->toArray());
 
         DB::beginTransaction();
 
         try {
-            $categoriaAnimal = $this->model->findOrFail($id);
 
-            $categoriaAnimal->descricao = $categoriaAnimalDados->validated()['descricao'];
+            $tipo = $this->model->findOrFail($id);
 
-            $categoriaAnimal->save();
+            $tipo->descricao = $dadosRequest->validated()['descricao'];
+
+            $tipo->save();
             DB::commit();
-            return $categoriaAnimal;
+            return $tipo;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function destroy(string $id)
-    {
 
+    public function destroy($id)
+    {
         DB::beginTransaction();
 
         try {
-            $categoria = $this->model->findOrFail($id)->delete();
+
+            $tipo = $this->model->findOrFail($id);
+
+            $tipo->dt_exclusao = Carbon::now();
+
+            $tipo->save();
             DB::commit();
-            return $categoria;
+            return $tipo;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function desativar(string $id)
+
+    public function inativar($id)
     {
 
         DB::beginTransaction();
 
         try {
-            $categoriaAnimal = $this->model->findOrFail($id);
 
-            $categoriaAnimal->dt_inativacao = Carbon::now();
+            $tipo = $this->model->findOrFail($id);
 
-            $categoriaAnimal->save();
+            $tipo->dt_inativacao = Carbon::now();
+
+            $tipo->save();
             DB::commit();
-            return $categoriaAnimal;
+            return $tipo;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function ativar(string $id)
+
+    public function ativar($id)
     {
 
         DB::beginTransaction();
 
         try {
-            $categoriaAnimal = $this->model->findOrFail($id);
 
-            $categoriaAnimal->dt_inativacao = null;
+            $tipo = $this->model->findOrFail($id);
 
-            $categoriaAnimal->save();
+            $tipo->dt_inativacao = null;
+
+            $tipo->save();
             DB::commit();
-            return $categoriaAnimal;
+            return $tipo;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

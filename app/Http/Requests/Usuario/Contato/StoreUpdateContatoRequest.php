@@ -22,6 +22,7 @@ class StoreUpdateContatoRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $regras = [
             'dd' => [
                 'required',

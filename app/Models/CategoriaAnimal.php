@@ -18,6 +18,7 @@ class CategoriaAnimal extends Model
         "dt_registro",
         "dt_inativacao"
     ];
+
     protected $attributes = [
         'dt_inativacao' => null
     ];

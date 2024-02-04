@@ -8,7 +8,6 @@ use App\Http\Resources\Usuario\UsuarioResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Animal\FotoAnimalResource;
 use App\Http\Resources\Animal\PorteAnimalResource;
-use App\Http\Resources\Animal\FavoritoAnimalResource;
 use App\Http\Resources\Animal\CategoriaAnimalResource;
 
 class AnimalResource extends JsonResource
@@ -36,7 +35,6 @@ class AnimalResource extends JsonResource
             'categoria' => new CategoriaAnimalResource($this->categoria),
             "id_porte" => $this->id_porte,
             'porte' => new PorteAnimalResource($this->porte),
-            // 'fotos' => FotoAnimalResource::collection($this->fotos),
             'fotos' => $this->unless(
                 $request->routeIs('animaisFoto.index'), // Exclui a relação 'fotos' se a rota for 'animaisFoto.index'
                 function () {
@@ -46,6 +44,8 @@ class AnimalResource extends JsonResource
             "id_usuario" => $this->id_usuario,
             'usuario' => new UsuarioResource($this->usuario),
             'favoritoUsuario' => $this->favoritoUsuario($this->id_animal),
+            'denunciasUsuario' => $this->denunciasUsuario($this->id_animal),
+            'respostaDenuncia' => $this->respostaDenuncia($this->id_animal),
             "adotado" => $this->adotado,
         ];
     }

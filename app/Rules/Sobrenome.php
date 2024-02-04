@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class Sobrenome implements ValidationRule
 {
+
     /**
      * Run the validation rule.
      *

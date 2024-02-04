@@ -24,6 +24,7 @@ class StoreUpdateFavoritoAnimalRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $regras = [
             'id_usuario' => [
                 'required',
@@ -44,6 +45,7 @@ class StoreUpdateFavoritoAnimalRequest extends FormRequest
 
     public function messages(): array
     {
+
         return [
             'id_usuario.exists' => 'Usuário não encontrado',
             'id_animal.exists' => 'Animal não encontrado',

@@ -1,26 +1,30 @@
 <?php
 
-namespace App\Services\Animal;
+namespace App\Http\Services\Animal;
 
 use Carbon\Carbon;
 use App\Models\Animal;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
 use Illuminate\Support\Facades\Storage;
-use App\Services\Usuario\UsuarioService;
+use App\Http\Services\Usuario\UsuarioService;
 use App\Http\Requests\Animal\StoreUpdateAnimalRequest;
 
 class AnimalService
 {
+
     protected $model;
     protected $formRequest;
+
     public function __construct()
     {
         $this->model = new Animal();
         $this->formRequest = new StoreUpdateAnimalRequest();
     }
+
     public function index(): object
     {
+
         try {
             return $this->model->whereNull(
                 'dt_inativacao'
@@ -29,8 +33,10 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function animaisUsuario(): object
     {
+
         try {
             return $this->model
                 ->where(
@@ -45,6 +51,7 @@ class AnimalService
 
     public function inativos(): object
     {
+
         try {
             return $this->model->whereNotNull(
                 'dt_inativacao',
@@ -60,12 +67,14 @@ class AnimalService
 
     public function show(string $id): object
     {
+
         try {
             return $this->model->findOrFail($id);
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 
@@ -118,6 +127,7 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function destroy($idAnimal)
     {
 
@@ -146,6 +156,7 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function desativarAnimal($id)
     {
 
@@ -162,6 +173,7 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function ativarAnimal($id)
     {
 
@@ -199,6 +211,7 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function retirarDenuncia($idAnimal)
     {
 
@@ -218,6 +231,7 @@ class AnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function adotado($id, $request)
     {
 

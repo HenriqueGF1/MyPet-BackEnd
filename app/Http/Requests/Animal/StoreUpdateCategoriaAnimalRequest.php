@@ -21,6 +21,7 @@ class StoreUpdateCategoriaAnimalRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $regras = [
             'descricao' => [
                 'required',

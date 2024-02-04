@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Animal;
+namespace App\Http\Services\Animal;
 
 use App\Models\FavoritoAnimal;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
+use App\Http\Services\Usuario\UsuarioService;
 use App\Http\Requests\Animal\StoreUpdateFavoritoAnimalRequest;
-use App\Services\Usuario\UsuarioService;
 
 class FavoritoService
 {
@@ -18,14 +18,17 @@ class FavoritoService
         $this->model = new FavoritoAnimal();
         $this->formRequest = new StoreUpdateFavoritoAnimalRequest();
     }
+
     public function index()
     {
+
         try {
             return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Endereco extends Model
 {
+
     use HasFactory;
+
     protected $table = 'endereco';
     protected $primaryKey = 'id_endereco';
     public $timestamps = false;

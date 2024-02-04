@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Usuario;
+namespace App\Http\Services\Usuario;
 
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
@@ -8,14 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Exceptions\ErroGeralException;
 use App\Http\Resources\Usuario\UsuarioResource;
 use App\Http\Requests\Usuario\LoginUsuarioRequest;
+use App\Http\Services\Usuario\Contato\ContatoService;
+use App\Http\Services\Usuario\Endereco\EnderecoService;
 use App\Http\Requests\Usuario\StoreUpdateUsuarioRequest;
-use App\Services\Usuario\Contato\ContatoService;
-use App\Services\Usuario\Endereco\EnderecoService;
-
-use function PHPUnit\Framework\isNull;
 
 class UsuarioService
 {
+
     protected $model;
     protected $formRequest;
     protected $contatoRequest;
@@ -152,6 +151,7 @@ class UsuarioService
 
     protected function respondWithToken($token)
     {
+
         $user = Auth::user();
 
         return response()->json([
@@ -180,7 +180,9 @@ class UsuarioService
             $usuario->nome = $usuarioRequest->validated()['nome'];
 
             $usuario->save();
+
             DB::commit();
+
             return $usuario;
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -194,6 +196,7 @@ class UsuarioService
         DB::beginTransaction();
 
         try {
+
             $this->model->destroy($id);
             // $this->logout();
             DB::commit();
@@ -209,18 +212,22 @@ class UsuarioService
         DB::beginTransaction();
 
         try {
+
             $usuario = $this->model->findOrFail($idUsuario);
 
             $usuario->qtd_denuncia = $usuario->qtd_denuncia + 1;
 
             $usuario->save();
+
             DB::commit();
+
             return $this->model->findOrFail($idUsuario);
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function retirarDenuncia($idUsuario)
     {
 

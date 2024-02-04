@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Http\Services\Admin;
 
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Exceptions\ErroGeralException;
 use App\Http\Resources\Usuario\UsuarioResource;
 use App\Http\Requests\Usuario\LoginUsuarioRequest;
 use App\Models\Animal;
-use App\Models\DenunciaAnimal;
 
 class AdminService
 {
+
     protected $model;
     protected $formRequest;
+
     public function __construct()
     {
         $this->model = new Usuario();
         $this->formRequest = new LoginUsuarioRequest();
     }
+
     public function login($request)
     {
 
@@ -28,7 +29,10 @@ class AdminService
         try {
 
             if (!$token = Auth::attempt($credentials->validated())) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json([
+                    'code' => 404,
+                    'errors' => 'Senha ou E-mail errados',
+                ], 401);
             }
 
             $user = Auth::user();
@@ -43,7 +47,7 @@ class AdminService
             } else {
                 return response()->json([
                     'code' => 401,
-                    'error' => 'Unauthorized',
+                    'errors' => 'Não autorizado',
                 ], 401);
             }
         } catch (\Exception $exception) {
@@ -53,6 +57,7 @@ class AdminService
 
     protected function respondWithToken($token)
     {
+
         try {
 
             $user = Auth::user();
@@ -71,9 +76,12 @@ class AdminService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function dashBoard()
     {
+
         try {
+
             // Usuario
             $usuario = Usuario::all();
             // Animal
@@ -88,7 +96,7 @@ class AdminService
                 'data' => [
                     'usuario' => $usuario->count(),
                     'animal' => $animal->count(),
-                    'animaisQtdDenuncias' => $animaisQtdDenuncias,
+                    'animaisQtdDenuncias' => intval($animaisQtdDenuncias),
                     'animaisAdotados' => $animaisAdotados->count(),
                     'animaisNaoAdotados' => $animaisNaoAdotados->count(),
                     'animaisMasculinos' => $animaisMasculinos->count(),

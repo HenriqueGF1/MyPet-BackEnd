@@ -35,7 +35,6 @@ class LoginUsuarioRequest extends FormRequest
             ],
         ];
 
-
         return $regras;
     }
 }

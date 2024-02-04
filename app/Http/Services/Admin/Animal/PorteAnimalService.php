@@ -1,42 +1,52 @@
 <?php
 
-namespace App\Services\Admin\Denuncia;
+namespace App\Http\Services\Admin\Animal;
 
 use Carbon\Carbon;
-use App\Models\DenunciaTipo;
+use App\Models\PorteAnimal;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
-use App\Http\Requests\Denuncia\StoreUpdateDenunciaTipoRequest;
+use App\Http\Requests\Animal\StoreUpdatePorteAnimalRequest;
 
-class DenunciaTipoService
+class PorteAnimalService
 {
+
     protected $model;
     protected $formRequest;
+
     public function __construct()
     {
-        $this->model = new DenunciaTipo();
-        $this->formRequest = new StoreUpdateDenunciaTipoRequest();
+        $this->model = new PorteAnimal();
+        $this->formRequest = new StoreUpdatePorteAnimalRequest();
     }
+
     public function index()
     {
+
         try {
             return $this->model->whereNull(
                 ['dt_inativacao', 'dt_exclusao']
             )->get();
         } catch (\Exception $exception) {
+            DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function indexADM()
     {
+
         try {
             return $this->model->all();
         } catch (\Exception $exception) {
+            DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function show(string $id)
     {
+
         try {
             return $this->model->findOrFail($id);
         } catch (\Exception $exception) {
@@ -44,37 +54,39 @@ class DenunciaTipoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
-        $dadosRequest = app($this->formRequest::class, $request->toArray());
+
+        $porteAnimalDados = app($this->formRequest::class, $request->toArray());
 
         DB::beginTransaction();
 
         try {
-            $tipoDenuncia = $this->model->create($dadosRequest->validated());
+            $porte = $this->model->create($porteAnimalDados->validated());
             DB::commit();
-            return $tipoDenuncia;
+            return $porte;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function update($request, $id)
     {
 
-        $dadosRequest = app($this->formRequest::class, $request->toArray());
+        $porteAnimalDados = app($this->formRequest::class,  $request->toArray());
 
         DB::beginTransaction();
 
         try {
+            $porteAnimal = $this->model->findOrFail($id);
 
-            $tipo = $this->model->findOrFail($id);
+            $porteAnimal->descricao = $porteAnimalDados->validated()['descricao'];
 
-            $tipo->descricao = $dadosRequest->validated()['descricao'];
-
-            $tipo->save();
+            $porteAnimal->save();
             DB::commit();
-            return $tipo;
+            return $porteAnimal;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
@@ -83,53 +95,55 @@ class DenunciaTipoService
 
     public function destroy($id)
     {
+
         DB::beginTransaction();
 
         try {
 
-            $tipo = $this->model->findOrFail($id);
+            $porte = $this->model->findOrFail($id);
 
-            $tipo->dt_exclusao = Carbon::now();
+            $porte->dt_exclusao = Carbon::now();
 
-            $tipo->save();
+            $porte->save();
             DB::commit();
-            return $tipo;
+            return $porte;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function inativar($id)
+
+    public function desativar($id)
     {
         DB::beginTransaction();
 
         try {
+            $porteAnimal = $this->model->findOrFail($id);
 
-            $tipo = $this->model->findOrFail($id);
+            $porteAnimal->dt_inativacao = Carbon::now();
 
-            $tipo->dt_inativacao = Carbon::now();
-
-            $tipo->save();
+            $porteAnimal->save();
             DB::commit();
-            return $tipo;
+            return $porteAnimal;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function ativar($id)
     {
+
         DB::beginTransaction();
 
         try {
+            $porteAnimal = $this->model->findOrFail($id);
 
-            $tipo = $this->model->findOrFail($id);
+            $porteAnimal->dt_inativacao = null;
 
-            $tipo->dt_inativacao = null;
-
-            $tipo->save();
+            $porteAnimal->save();
             DB::commit();
-            return $tipo;
+            return $porteAnimal;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw new ErroGeralException($exception->getMessage());

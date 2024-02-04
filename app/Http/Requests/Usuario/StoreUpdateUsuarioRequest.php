@@ -41,7 +41,7 @@ class StoreUpdateUsuarioRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                // 'unique:usuario',
+                'unique:usuario',
             ],
             'idade' => [
                 'required',
@@ -61,7 +61,7 @@ class StoreUpdateUsuarioRequest extends FormRequest
             );
         }
 
-        // Atualizando
+        // Update
         if ($this->isMethod('put') || $this->isMethod('patch')) {
 
             $regras = [

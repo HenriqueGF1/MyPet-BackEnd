@@ -14,6 +14,7 @@ class EnderecoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             "id_endereco" => $this->id_endereco,
             "id_usuario" => $this->id_usuario,

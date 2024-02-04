@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Usuario;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Exceptions\ErroGeralException;
 use App\Http\Resources\Contato\ContatoResource;
-use App\Services\Usuario\Contato\ContatoService;
-
+use App\Http\Services\Usuario\Contato\ContatoService;
 
 class ContatoController extends Controller
 {
@@ -33,14 +31,17 @@ class ContatoController extends Controller
     {
         return new ContatoResource($this->service->store($request));
     }
-    public function definirPrincipal(string $idUsuario, string $idContato)
+
+    public function definirPrincipal(string $idContato)
     {
-        return new ContatoResource($this->service->definirPrincipal($idUsuario, $idContato));
+        return new ContatoResource($this->service->definirPrincipal($idContato));
     }
+
     public function update(Request $request, string $id)
     {
         return new ContatoResource($this->service->update($request, $id));
     }
+
     public function destroy(string $id)
     {
         return $this->service->destroy($id);

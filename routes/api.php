@@ -36,6 +36,14 @@ Route::post('/login', [UsuarioController::class, 'login'])->name('usuario.login'
 // ADM
 Route::post('admin/login', [AdminController::class, 'login'])->name('adminLogin.login');
 
+// Combos
+Route::controller(PorteAnimalController::class)->group(function (): void {
+    Route::get('/porteAnimais', 'index')->name('porteAnimais.index');
+});
+//
+Route::controller(CategoriaAnimalController::class)->group(function (): void {
+    Route::get('/categoriasAnimal', 'index')->name('categoriasAnimal.index');
+});
 
 // JWT Autenticador
 Route::middleware(['jwt.verify'])->group(function () {
@@ -175,8 +183,7 @@ Route::middleware(['jwt.verify'])->group(function () {
             //
             Route::post('/contatos', 'store')->name('contato.store');
             //
-            Route::patch('/usuarios/{idUsuario}/contatos/{idContato}/definirPrincipal', 'definirPrincipal')
-                ->where('idUsuario', '[0-9]+')
+            Route::patch('/contatos/{idContato}/definirPrincipal', 'definirPrincipal')
                 ->where('idContato', '[0-9]+')
                 ->name('contato.definirPrincipal');
             //
@@ -269,7 +276,7 @@ Route::middleware(['jwt.verify'])->group(function () {
                 ->where('id', '[0-9]+')
                 ->name('enderecos.destroy');
             //
-            Route::patch('/usuarios/enderecos/{idEndereco}/definirPrincipal', 'definirPrincipal')
+            Route::patch('/enderecos/{idEndereco}/definirPrincipal', 'definirPrincipal')
                 ->where('idEndereco', '[0-9]+')
                 ->name('enderecos.definirPrincipal');
         });
@@ -306,18 +313,20 @@ Route::middleware(['jwt.verify'])->group(function () {
             Route::patch('animais/retirarDenuncia/{id}', 'retirarDenuncia')
                 ->where('id', '[0-9]+')
                 ->name('animaisDenuncia.retirarDenuncia');
+            //
+            Route::patch('animais/ativarNovamenteDenuncia/{id}', 'ativarNovamenteDenuncia')
+                ->where('id', '[0-9]+')
+                ->name('animaisDenuncia.ativarNovamenteDenuncia');
+        });
+
+        // DENUNCIA_RESPOSTA
+        Route::controller(DenunciaRespostaController::class)->group(function (): void {
+            Route::get('denuncias/respostas/{idAnimal}', 'respostaDenunciaUsuario')->name('denunciaResposta.respostaDenunciaUsuario')
+                ->where('idAnimal', '[0-9]+');
+            //
         });
 
         // Combos
-
-        Route::controller(PorteAnimalController::class)->group(function (): void {
-            Route::get('/porteAnimais', 'index')->name('porteAnimais.index');
-        });
-
-        Route::controller(CategoriaAnimalController::class)->group(function (): void {
-            Route::get('/categoriasAnimal', 'index')->name('categoriasAnimal.index');
-        });
-
         Route::controller(DenunciaTipoController::class)->group(function (): void {
             Route::get('denuncias/tipos', 'index')->name('denunciaTipo.index');
         });

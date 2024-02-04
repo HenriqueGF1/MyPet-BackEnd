@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Animal;
+namespace App\Http\Services\Animal;
 
 use App\Models\FotoAnimal;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +22,7 @@ class FotoAnimalService
 
     public function index(string $idAnimal)
     {
+
         try {
             return $this->model
                 ->where('id_animal', '=', $idAnimal)
@@ -30,15 +31,17 @@ class FotoAnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function show(string $idAnimal, string $idFoto)
     {
-        // return $this->model->where('id_animal', '=', $idAnimal)->where('id_foto_animal', '=', $idFoto)->get();
+
         try {
             return $this->model->findOrFail($idFoto);
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 
@@ -47,6 +50,10 @@ class FotoAnimalService
         DB::beginTransaction();
 
         try {
+
+            if (!$request->hasFile('imagens')) {
+                throw new ErroGeralException('Sem arquivo');
+            }
 
             $fotos = $fotoAnimalDados->validated()['imagens'];
             $idAnimal = $fotoAnimalDados->validated()['id_animal'];
@@ -69,6 +76,7 @@ class FotoAnimalService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function update($request, $idAnimal)
     {
 
@@ -77,6 +85,10 @@ class FotoAnimalService
         DB::beginTransaction();
 
         try {
+
+            if (!$request->hasFile('imagens')) {
+                throw new ErroGeralException('Sem arquivo');
+            }
 
             $idAnimal = $fotoAnimalDados->validated()['id_animal'];
 

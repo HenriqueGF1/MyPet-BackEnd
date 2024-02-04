@@ -26,7 +26,7 @@ class StoreUpdateEnderecoRequest extends FormRequest
             'cep' => [
                 'required',
                 'max:8',
-                'min:5',
+                'min:8',
             ],
             'bairro' => [
                 'required',
@@ -36,7 +36,7 @@ class StoreUpdateEnderecoRequest extends FormRequest
             'numero_endereco' => [
                 'required',
                 'max:255',
-                'min:2',
+                'min:1',
             ],
             'complemento' => [
                 'required',
@@ -45,14 +45,14 @@ class StoreUpdateEnderecoRequest extends FormRequest
             ]
         ];
 
-        // Atualizando
+        // Update
         if ($this->isMethod('put') || $this->isMethod('patch')) {
 
             $regras = [
                 'cep' => [
                     'nullable',
                     'max:8',
-                    'min:5',
+                    'min:8',
                 ],
                 'bairro' => [
                     'nullable',

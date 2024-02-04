@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Denuncia;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Exceptions\ErroGeralException;
-use App\Services\Denuncia\DenunciaAnimalService;
+use App\Http\Services\Denuncia\DenunciaAnimalService;
 use App\Http\Resources\Denuncia\DenunciaAnimalResource;
 use App\Http\Requests\Denuncia\StoreUpdateDenunciaAnimalRequest;
 
@@ -26,28 +25,46 @@ class DenunciaAnimalController extends Controller
             $this->service->index()
         );
     }
+
     public function store(Request $request)
     {
         return new DenunciaAnimalResource(
             $this->service->store($request)
         );
     }
+
     public function show(string $id)
     {
         return new DenunciaAnimalResource(
             $this->service->show($id)
         );
     }
+
+    public function respostaDenunciaUsuario(string $idAnimal)
+    {
+        return DenunciaAnimalResource::collection(
+            $this->service->respostaDenunciaUsuario($idAnimal)
+        );
+    }
+
     public function update(Request $request, string $id)
     {
         return new DenunciaAnimalResource(
             $this->service->update($request, $id)
         );
     }
+
     public function retirarDenuncia(string $id)
     {
         return new DenunciaAnimalResource(
             $this->service->retirarDenuncia($id)
+        );
+    }
+
+    public function ativarNovamenteDenuncia(string $id)
+    {
+        return new DenunciaAnimalResource(
+            $this->service->ativarNovamenteDenuncia($id)
         );
     }
 }

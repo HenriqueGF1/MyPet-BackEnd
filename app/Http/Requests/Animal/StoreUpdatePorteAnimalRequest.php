@@ -21,6 +21,7 @@ class StoreUpdatePorteAnimalRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $regras = [
             'descricao' => [
                 'required',
@@ -29,7 +30,7 @@ class StoreUpdatePorteAnimalRequest extends FormRequest
             ],
         ];
 
-        // Quando nao vai cadastrar
+        // Cadastro
         if (!$this->isMethod('post')) {
 
             $regras = [

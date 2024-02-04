@@ -18,7 +18,8 @@ class CategoriaAnimalResource extends JsonResource
             "id_categoria" => $this->id_categoria,
             "descricao" => $this->descricao,
             "dt_registro" => $this->dt_registro,
-            "dt_inativacao" => $this->dt_inativacao
+            "dt_inativacao" => $this->dt_inativacao,
+            "dt_exclusao" => $this->dt_exclusao
         ];
     }
 }

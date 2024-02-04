@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\Models\Animal;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\Usuario\UsuarioService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FavoritoAnimal extends Model
 {
+
     use HasFactory;
 
     protected $table = 'favorito_animal';

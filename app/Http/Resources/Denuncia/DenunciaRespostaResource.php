@@ -15,6 +15,9 @@ class DenunciaRespostaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if (is_null($this->resource)) {
+            return [];
+        };
         return [
             "id_resposta" => $this->id_resposta,
             "resposta" => $this->resposta,

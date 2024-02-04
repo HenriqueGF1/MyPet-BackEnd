@@ -23,6 +23,7 @@ class StoreUpdateDenunciaAnimalRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $regras = [
             'descricao' => [
                 'required',
@@ -56,7 +57,7 @@ class StoreUpdateDenunciaAnimalRequest extends FormRequest
 
         ];
 
-        // Quando nao vai cadastrar
+        // Cadastro
         if (!$this->isMethod('post')) {
 
             $regras = [

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Usuario\Contato;
+namespace App\Http\Services\Usuario\Contato;
 
 use App\Models\Contato;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
-use App\Services\Usuario\UsuarioService;
+use App\Http\Services\Usuario\UsuarioService;
 use App\Http\Requests\Usuario\Contato\StoreUpdateContatoRequest;
-
 
 class ContatoService
 {
+
     protected $model;
     protected $formRequest;
 
@@ -19,14 +19,17 @@ class ContatoService
         $this->model = new Contato();
         $this->formRequest = new StoreUpdateContatoRequest();
     }
+
     public function index()
     {
+
         try {
-            return $this->model->get()->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged());
+            return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())->orderBy('principal', 'desc')->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function show($id): object
     {
         try {
@@ -35,6 +38,7 @@ class ContatoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 
@@ -61,8 +65,10 @@ class ContatoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function checarContatoPrincipal(string $idUsuario, string $idContato)
     {
+
         try {
             $contato = $this->model->where('id_usuario', '=', $idUsuario)->get();
             if (count($contato) == 1) {
@@ -72,14 +78,15 @@ class ContatoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
-    public function definirPrincipal(string $idUsuario, string $idContato): object
+
+    public function definirPrincipal(string $idContato): object
     {
 
         DB::beginTransaction();
 
         try {
 
-            $this->model->where('id_usuario', $idUsuario)->update([
+            $a = $this->model->where('id_usuario', UsuarioService::getIdUsuarioLoged())->update([
                 'principal' => 0
             ]);
 
@@ -97,6 +104,7 @@ class ContatoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function update($request, $id): object
     {
 
@@ -123,6 +131,7 @@ class ContatoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function destroy(string $id)
     {
 

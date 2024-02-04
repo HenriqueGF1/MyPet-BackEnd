@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DenunciaAnimal extends Model
 {
+
     use HasFactory;
+
     protected $table = 'denuncia';
     protected $primaryKey = 'id_denuncia';
     public $timestamps = false;
@@ -20,6 +22,7 @@ class DenunciaAnimal extends Model
         "descricao",
         "dt_inativacao",
         "dt_exclusao",
+        "dt_registro",
         "id_tipo",
         "id_usuario_denunciante",
         "id_usuario",
@@ -30,18 +33,22 @@ class DenunciaAnimal extends Model
     {
         return $this->belongsTo(Animal::class, 'id_animal', 'id_animal');
     }
+
     public function tipo(): HasOne
     {
         return $this->hasOne(DenunciaTipo::class, 'id_tipo', 'id_tipo');
     }
+
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
+
     public function usuarioDenunciante(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'id_usuario_denunciante', 'id_usuario');
     }
+
     public function respostas(): HasMany
     {
         return $this->hasMany(DenunciaResposta::class, 'id_denuncia', 'id_denuncia');

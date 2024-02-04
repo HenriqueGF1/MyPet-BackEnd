@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Perfil_Usuario extends Model
 {
+
     use HasFactory;
+
     protected $table = 'perfil_usuario';
     protected $primaryKey = 'id_perfil_usuario';
     public $timestamps = false;
@@ -19,6 +21,7 @@ class Perfil_Usuario extends Model
         "id_usuario",
         "dt_registro"
     ];
+
     protected $attributes = [];
 
     /**
@@ -33,6 +36,7 @@ class Perfil_Usuario extends Model
     {
         return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
+
     public function perfil(): BelongsTo
     {
         return $this->belongsTo(Perfil::class, 'id_perfil', 'id_perfil');

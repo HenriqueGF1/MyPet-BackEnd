@@ -23,6 +23,7 @@ class StoreDenunciaRespostaRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'resposta' => [
                 'required',
@@ -40,8 +41,10 @@ class StoreDenunciaRespostaRequest extends FormRequest
             ],
         ];
     }
+
     public function messages(): array
     {
+
         return [
             'id_denuncia.exists' => 'Denuncia não encontrado',
         ];

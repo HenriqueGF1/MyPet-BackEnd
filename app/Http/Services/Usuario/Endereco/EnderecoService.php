@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Usuario\Endereco;
+namespace App\Http\Services\Usuario\Endereco;
 
 use App\Models\Endereco;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\ErroGeralException;
-use App\Services\Usuario\UsuarioService;
+use App\Http\Services\Usuario\UsuarioService;
 use App\Http\Requests\Usuario\Endereco\StoreUpdateEnderecoRequest;
-
 
 class EnderecoService
 {
+
     protected $model;
     protected $formRequest;
 
@@ -22,22 +22,24 @@ class EnderecoService
 
     public function index()
     {
+
         try {
-            return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())
-                ->orderBy('id_endereco')
-                ->get();
+            return $this->model->where('id_usuario', '=', UsuarioService::getIdUsuarioLoged())->orderBy('principal', 'desc')->get();
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function show(string $id)
     {
+
         try {
             return $this->model->findOrFail($id);
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function store($request)
     {
 
@@ -64,9 +66,12 @@ class EnderecoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function checarContatoPrincipal(string $idUsuario, string $idEndereco)
     {
+
         try {
+
             $endereco = $this->model->where('id_usuario', '=', $idUsuario)->get();
             if (count($endereco) == 1) {
                 $this->definirPrincipal($idUsuario, $idEndereco);
@@ -75,6 +80,7 @@ class EnderecoService
             throw new ErroGeralException($exception->getMessage());
         }
     }
+
     public function definirPrincipal(string $idEndereco): object
     {
 

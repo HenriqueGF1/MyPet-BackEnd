@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Animal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Exceptions\ErroGeralException;
-use App\Services\Animal\AnimalService;
 use App\Http\Resources\Animal\AnimalResource;
+use App\Http\Services\Animal\AnimalService;
 
 class AnimalController extends Controller
 {
@@ -23,6 +22,7 @@ class AnimalController extends Controller
             $this->service->index()
         );
     }
+
     // Animais do usuário
     public function animaisUsuario(): object
     {
@@ -30,16 +30,19 @@ class AnimalController extends Controller
             $this->service->animaisUsuario()
         );
     }
+
     public function show(string $id): object
     {
         return new AnimalResource($this->service->show($id));
     }
+
     public function store(Request $request)
     {
         return $this->service->store(
             $request
         );
     }
+
     public function update(Request $request, string $id)
     {
         return new AnimalResource(
@@ -49,12 +52,14 @@ class AnimalController extends Controller
             )
         );
     }
+
     public function destroy(string $id)
     {
         return $this->service->destroy(
             $id
         );
     }
+
     // Mostrar animais inativos
     public function inativos(): object
     {
@@ -62,6 +67,7 @@ class AnimalController extends Controller
             $this->service->inativos()
         );
     }
+
     // Desativar animal
     public function desativarAnimal(string $id)
     {
@@ -71,6 +77,7 @@ class AnimalController extends Controller
             )
         );
     }
+
     // Ativar animal
     public function ativarAnimal(string $id)
     {
@@ -80,6 +87,7 @@ class AnimalController extends Controller
             )
         );
     }
+
     //
     public function adotado(string $id, Request $request)
     {
