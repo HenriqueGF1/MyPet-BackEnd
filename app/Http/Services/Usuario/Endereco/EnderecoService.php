@@ -74,7 +74,7 @@ class EnderecoService
 
             $endereco = $this->model->where('id_usuario', '=', $idUsuario)->get();
             if (count($endereco) == 1) {
-                $this->definirPrincipal($idUsuario, $idEndereco);
+                $this->definirPrincipal($idEndereco);
             }
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());

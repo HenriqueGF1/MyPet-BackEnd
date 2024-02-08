@@ -12,6 +12,15 @@ use App\Http\Resources\Animal\CategoriaAnimalResource;
 
 class AnimalResource extends JsonResource
 {
+
+    public function calcularIdade($dataNascimento)
+    {
+        $idade = Carbon::parse($dataNascimento);
+        return $idade->diffInYears() > 0
+            ? $idade->diffInYears() . ($idade->diffInYears() > 1 ? " anos" : " ano")
+            : ($idade->diffInMonths() > 0 ? $idade->diffInMonths() . ($idade->diffInMonths() > 1 ? " meses" : " mês") : "Recém nascido");
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -25,7 +34,7 @@ class AnimalResource extends JsonResource
             "nome" => $this->nome,
             "descricao" => $this->descricao,
             // "idade" => Carbon::parse($this->idade)->format('d/m/Y'),
-            "idade" => Carbon::parse($this->idade)->diffInYears(),
+            "idade" => $this->calcularIdade($this->idade),
             "idadeEUA" =>  date('Y-m-d', strtotime($this->idade)),
             "sexo" => $this->sexo,
             "dt_registro" => $this->dt_registro,

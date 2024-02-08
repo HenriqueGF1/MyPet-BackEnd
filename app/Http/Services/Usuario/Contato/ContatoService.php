@@ -72,7 +72,7 @@ class ContatoService
         try {
             $contato = $this->model->where('id_usuario', '=', $idUsuario)->get();
             if (count($contato) == 1) {
-                $this->definirPrincipal($idUsuario, $idContato);
+                $this->definirPrincipal($idContato);
             }
         } catch (\Exception $exception) {
             throw new ErroGeralException($exception->getMessage());
@@ -86,7 +86,7 @@ class ContatoService
 
         try {
 
-            $a = $this->model->where('id_usuario', UsuarioService::getIdUsuarioLoged())->update([
+            $this->model->where('id_usuario', UsuarioService::getIdUsuarioLoged())->update([
                 'principal' => 0
             ]);
 
