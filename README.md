@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MeuPet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+O sistema MyPet é uma plataforma online projetada para ajudar os usuários a encontrar animais para adoção. Com o MyPet, a adoção de animais de estimação se torna mais acessível e conveniente para os usuários, ao mesmo tempo, em que ajuda a encontrar lares amorosos para animais necessitados.
 
-## About Laravel
+O Projeto
+Esse projeto e somente a parte do Back-End para ter o projeto completo baixe também a parte do Front-End
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[MyPet-FrontEnd](https://github.com/HenriqueGF1/MyPet-FrontEnd)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Passo a Passo para a instalação do projeto.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone seu projeto
+2. Vá para o aplicativo de pasta usando o comando  `cd`  no seu cmd ou terminal
+3. Execute  `composer install`  no seu cmd ou terminal
+4. Copie o arquivo  `.env.example`  para  `.env`  na pasta raiz. Você pode digitar  `copy .env.example .env`  se estiver
+   usando o comando Prompt Windows ou  `cp .env.example .env`  se estiver usando o terminal, Ubuntu
+5. Abra o arquivo  `.env`  e altere o nome do banco de dados 
 
-## Learning Laravel
+> [Script para o Banco de Dados do Projeto](/Banco%20de%20Dados/Script.sql)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+(`DB_DATABASE`) ('mypet'), o nome de
+   usuário (`DB_USERNAME`) e a senha (`DB_PASSWORD`) correspondem à sua configuração.  
+   Por padrão, o nome de usuário é  `root`  e você pode deixar o campo da senha em branco.  (Isto é para Xampp) , Por
+   padrão, o nome de usuário é  `root`  e a senha também é  `root`.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+6. Execute  `php artisan key:generate`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+9. Execute  `php artisan storage:link`
+10. Execute  `php artisan serve`
+11. Vá ate o navegador e digite `http://127.0.0.1:8000/`
+12. [MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
 
-## Laravel Sponsors
+## Tecnologias Utilizadas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<h2>Laravel 10</h2>
 
-### Premium Partners
+Laravel é um framework PHP livre e de código aberto utilizado no desenvolvimento de sistemas web, seguindo o padrão arquitetural MVC (Model-View-Controller). Ele oferece uma sintaxe expressiva e elegante que visa tornar o desenvolvimento web uma tarefa agradável, sem sacrificar a funcionalidade.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+[Documentação](https://laravel.com/docs/10.x)
 
-## Contributing
+<h2>JWT (JSON Web Tokens)</h2>
+JWT é um padrão aberto (RFC 7519) que define uma maneira compacta e autocontida para transmitir informações de forma segura entre partes como um objeto JSON. Os tokens JWT são usados para autenticação e troca segura de informações entre sistemas.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+[Documentação](https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
 
-## Code of Conduct
+<h2>Pt-br-validator</h2>
+pt-br-validator é um pacote para validação de dados em Português Brasileiro no Laravel. Ele fornece regras de validação específicas para o contexto brasileiro, facilitando a validação de campos como CPF, CNPJ, telefones, CEP, entre outros.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+[Documentação](https://github.com/LaravelLegends/pt-br-validator)
 
-## Security Vulnerabilities
+<h2>Laravel-pt-BR-localization</h2>
+O laravel-pt-BR-localization é um pacote de localização para o Laravel, que fornece traduções em Português Brasileiro para as mensagens de validação padrão do Laravel. Ele permite que os desenvolvedores tenham mensagens de erro de validação em português, o que pode facilitar a compreensão para os usuários finais.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+[Documentação](https://github.com/lucascudo/laravel-pt-BR-localization)
 
-## License
+<h2>MySQL</h2>
+MySQL é um sistema de gerenciamento de banco de dados relacional de código aberto e uma das tecnologias de banco de dados mais populares do mundo. Ele é amplamente utilizado em uma variedade de aplicativos, desde pequenos sites até grandes sistemas corporativos, devido à sua confiabilidade, escalabilidade e facilidade de uso.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[Documentação](https://www.mysql.com/)
+
+<h1>Api</h1>
+
+Para facilitar a navegação entre os endpoints e compreender as funcionalidades oferecidas pelo sistema.
+
+[MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
