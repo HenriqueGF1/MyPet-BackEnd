@@ -31,9 +31,10 @@ Passo a Passo para a instalação do projeto.
 6. Execute  `php artisan key:generate`
 
 9. Execute  `php artisan storage:link`
-10. Execute  `php artisan serve`
-11. Vá ate o navegador e digite `http://127.0.0.1:8000/`
-12. [MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
+10. Execute `php artisan jwt:secret` , para a chave do JWT
+11. Execute  `php artisan serve`
+12. Vá ate o navegador e digite `http://127.0.0.1:8000/`
+13. [MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
 
 ## Tecnologias Utilizadas
 
