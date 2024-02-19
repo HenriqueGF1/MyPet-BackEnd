@@ -29,10 +29,11 @@ Passo a Passo para a instalação do projeto.
    padrão, o nome de usuário é  `root`  e a senha também é  `root`.
 
 6. Execute  `php artisan key:generate`
-7. Execute `php artisan jwt:secret` , para a chave do JWT
-8. Execute  `php artisan serve`
-9. Vá ate o navegador e digite `http://127.0.0.1:8000/`
-10. [MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
+7. Execute  `php artisan storage:link`
+8. Execute `php artisan jwt:secret`, para a chave do JWT
+9. Execute  `php artisan serve`
+10. Vá ate o navegador e digite `http://127.0.0.1:8000/`
+11. [MyPet Api no PostMan](https://documenter.getpostman.com/view/11959429/2s9Yyy7dc6)
 
 ## Tecnologias Utilizadas
 
